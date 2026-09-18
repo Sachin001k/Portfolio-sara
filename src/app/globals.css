@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+:root {
+  --cream: #faf6f0;
+  --ink: #241f1c;
+  --clay: #c1592f;
+  --clay-dark: #9c431f;
+  --sand: #efe4d6;
+  --moss: #4c5a44;
+}
+
+@theme inline {
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+  --color-clay: var(--clay);
+  --color-clay-dark: var(--clay-dark);
+  --color-sand: var(--sand);
+  --color-moss: var(--moss);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
