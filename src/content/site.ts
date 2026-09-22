@@ -4,6 +4,9 @@
 // Items marked "[placeholder]" are gaps in the source material (no
 // document explained them) — swap in the real detail when it's ready.
 
+import type { MediaItem } from "@/components/Gallery";
+import type { DocumentItem } from "@/components/DocumentLink";
+
 export const siteConfig = {
   name: "Sara Hulyalkar",
   pronouns: "she/her",
@@ -33,7 +36,8 @@ export type ResearchItem = {
   title: string;
   description: string;
   bullets: string[];
-  images: { src: string; alt: string }[];
+  gallery: MediaItem[];
+  documents: DocumentItem[];
 };
 
 export const research: ResearchItem[] = [
@@ -47,35 +51,75 @@ export const research: ResearchItem[] = [
       "Supervised by Mr. Aman Kesarwani, Pangea Society",
       'Also awarded a CREST Gold Award (British Science Association) for an earlier version, "Turning Study Notes into Soundscapes for Better Learning"',
     ],
-    images: [
+    gallery: [
       {
+        type: "image",
         src: "/images/edubeats/crest-certificate.png",
         alt: "CREST Gold Award certificate awarded to Sara Hulyalkar",
       },
+    ],
+    documents: [
+      { title: "S.T. Yau Research Report (Comp-220)", href: "/documents/edubeats/comp220-research-report.pdf" },
+      { title: "CREST Research Report", href: "/documents/edubeats/crest-research-report.pdf" },
     ],
   },
   {
     tag: "Wearable Hardware · Ballet Science",
     title: "EquiPointe",
     description:
-      'An IMU + FSR-based wearable system, built with research partner Anshul Bhatt and internally code-named "IRIS," that quantifies unsafe ballet footwork in real time — specifically sickling and rolling, two of the most common causes of dancer injury. Two hardware iterations (FSR402 pressure sensors + MPU6050 IMU + a Madgwick filter) reached 80–89% accuracy classifying risky footwork, backed by a custom live-calibration dashboard for capturing and logging session data.',
+      'An IMU + FSR-based wearable system, built with research partner Anshul Bhatt and internally code-named "IRIS," that quantifies unsafe ballet footwork in real time — specifically sickling and rolling, two of the most common causes of dancer injury. Two hardware iterations (an early full-leg sensor rig, then a refined shoe-only build with FSR402 pressure sensors + an MPU6050 IMU + a Madgwick filter) reached 80–89% accuracy classifying risky footwork, backed by a custom live-calibration dashboard for capturing and logging session data.',
     bullets: [
       "Includes a full literature-review logbook and a conference-style presentation poster",
       "Custom dashboard software for live sensor calibration and session data capture",
     ],
-    images: [
+    gallery: [
       {
+        type: "image",
         src: "/images/equipointe/prototype-shoe.jpeg",
-        alt: "Prototype ballet shoe fitted with EquiPointe sensors and control box",
+        alt: "Refined prototype: a ballet shoe fitted with EquiPointe sensors and control box",
       },
       {
+        type: "image",
+        src: "/images/equipointe/prototype-iteration-1.jpeg",
+        alt: "Earlier prototype: a full-leg sensor rig worn over ballet shoes",
+      },
+      {
+        type: "image",
+        src: "/images/equipointe/sensor-pads-closeup.jpeg",
+        alt: "Close-up of the FSR pressure sensor pads",
+      },
+      {
+        type: "image",
         src: "/images/equipointe/imu-sensor-closeup.jpeg",
         alt: "Close-up of the MPU6050 IMU sensor mounted on the shoe",
       },
       {
+        type: "image",
         src: "/images/equipointe/dashboard-calibration.jpeg",
         alt: "EquiPointe dashboard software showing live sensor calibration and risk readout",
       },
+      {
+        type: "image",
+        src: "/images/equipointe/dashboard-capture.jpeg",
+        alt: "EquiPointe dashboard software showing session data capture",
+      },
+      {
+        type: "video",
+        src: "/videos/equipointe-test-1.mp4",
+        poster: "/images/equipointe/test-1-poster.jpg",
+        alt: "EquiPointe prototype testing footage",
+      },
+      {
+        type: "video",
+        src: "/videos/equipointe-test-2.mp4",
+        poster: "/images/equipointe/test-2-poster.jpg",
+        alt: "EquiPointe prototype testing footage",
+      },
+    ],
+    documents: [
+      { title: "Literature Review Logbook", href: "/documents/equipointe/iris-logbook.pdf" },
+      { title: "Competition Poster", href: "/documents/equipointe/iris-poster.pdf" },
+      { title: "Presentation Deck", href: "/documents/equipointe/iris-presentation.pdf" },
     ],
   },
   {
@@ -84,7 +128,11 @@ export const research: ResearchItem[] = [
     description:
       "Two independent papers exploring the economics and engineering of performing arts. \"Exploring Sensor-Based Wearable Technology For Ballet Training\" is the academic paper behind EquiPointe — covering ballet injury biomechanics, the economic cost of injury, and the Indian dance-training market. \"An In-Depth Analysis on the Economic Viability of Integrating Recent Technology Developments in Performing Arts Education\" applies the Baumol Cost Disease theory to performing-arts institutions, from Broadway to Indian conservatories, tied to India's National Education Policy 2020.",
     bullets: [],
-    images: [],
+    gallery: [],
+    documents: [
+      { title: "Sensor-Based Wearable Technology For Ballet Training", href: "/documents/research/ballet-wearable-tech-paper.pdf" },
+      { title: "Economic Viability of Technology in Performing Arts Education", href: "/documents/research/economic-viability-paper.pdf" },
+    ],
   },
 ];
 
@@ -92,59 +140,81 @@ export const ballet = {
   heading: "Ballet",
   description:
     "Sara has trained as a ballet dancer since the age of three. Her years on pointe are the throughline behind both EquiPointe and her ballet research paper — technology projects that grew directly out of her own training.",
-  video: {
-    src: "/videos/ballet-performance.mp4",
-    poster: undefined as string | undefined,
-  },
+  gallery: [
+    { type: "video", src: "/videos/ballet/performance.mp4", poster: "/images/ballet/performance-poster.jpg", alt: "Ballet performance" },
+    { type: "video", src: "/videos/ballet/practice-1.mp4", poster: "/images/ballet/practice-1-poster.jpg", alt: "Ballet practice session" },
+    { type: "video", src: "/videos/ballet/clip-1.mp4", poster: "/images/ballet/clip-1-poster.jpg", alt: "Ballet training clip" },
+    { type: "video", src: "/videos/ballet/clip-2.mp4", poster: "/images/ballet/clip-2-poster.jpg", alt: "Ballet training clip" },
+    { type: "video", src: "/videos/ballet/clip-3.mp4", poster: "/images/ballet/clip-3-poster.jpg", alt: "Ballet training clip" },
+    { type: "video", src: "/videos/ballet/clip-4.mp4", poster: "/images/ballet/clip-4-poster.jpg", alt: "Ballet training clip" },
+  ] satisfies MediaItem[],
 };
 
 export const movementLiteracy = {
   heading: "Movement Literacy",
   description:
     'A movement-education curriculum Sara designed herself, extending her ballet training into a teaching program for young dancers. She started with session-by-session lesson plans blending ballet-derived exercises with body-awareness games, then developed it into a formal curriculum proposal — complete with philosophy, eight curriculum modules, a safety framework, and institutional implementation models — written for physiotherapist review.',
-  images: [
-    { src: "/images/movement-literacy/session-1.jpg", alt: "Movement Literacy session in progress" },
-    { src: "/images/movement-literacy/session-2.jpg", alt: "Movement Literacy session in progress" },
-    { src: "/images/movement-literacy/session-3.jpg", alt: "Movement Literacy session in progress" },
-  ],
+  gallery: [
+    { type: "image", src: "/images/movement-literacy/session-1.jpg", alt: "Movement Literacy session in progress" },
+    { type: "image", src: "/images/movement-literacy/session-2.jpg", alt: "Movement Literacy session in progress" },
+    { type: "image", src: "/images/movement-literacy/session-3.jpg", alt: "Movement Literacy session in progress" },
+    { type: "image", src: "/images/movement-literacy/session-4.jpg", alt: "Movement Literacy session in progress" },
+    { type: "image", src: "/images/movement-literacy/session-5.jpg", alt: "Movement Literacy session in progress" },
+    { type: "image", src: "/images/movement-literacy/session-6.jpg", alt: "Movement Literacy session in progress" },
+  ] satisfies MediaItem[],
 };
 
 export type SchoolRoleItem = {
   role: string;
   context: string;
-  image: string;
+  gallery: MediaItem[];
 };
 
 export const schoolRoles: SchoolRoleItem[] = [
   {
     role: "MUN Head Chair",
     context: 'Head Chair at DAIMUN 2025 — "Polycrisis: Navigating a New Global Order"',
-    image: "/images/leadership/mun-head-chair.png",
+    gallery: [{ type: "image", src: "/images/leadership/mun-head-chair.png", alt: "MUN Head Chair at DAIMUN 2025" }],
   },
   {
     role: "Student Council",
     context: "[placeholder — add year/role details]",
-    image: "/images/leadership/student-council.png",
+    gallery: [{ type: "image", src: "/images/leadership/student-council.png", alt: "Student Council" }],
   },
   {
     role: "Sports Day House Captain",
     context: "[placeholder — add year/house details]",
-    image: "/images/leadership/sports-day-house-captain.png",
+    gallery: [
+      { type: "image", src: "/images/leadership/sports-day-house-captain.png", alt: "Sports Day House Captain" },
+      { type: "video", src: "/videos/march-past.mp4", poster: "/images/misc/march-past-poster.jpg", alt: "March past — first place" },
+    ],
   },
   {
-    role: "House Spirit",
-    context: "[placeholder — add event context]",
-    image: "/images/leadership/house-spirit.png",
+    role: "House Spirit — Panthers",
+    context: "[placeholder — add event/year context]",
+    gallery: [
+      { type: "image", src: "/images/leadership/house-spirit.png", alt: "House Spirit day, Panthers house" },
+      { type: "image", src: "/images/leadership/house-spirit-2.png", alt: "House Spirit day, Panthers house" },
+      { type: "image", src: "/images/leadership/house-spirit-3.png", alt: "Annual Athletic Meet, Panthers house" },
+    ],
   },
   {
     role: "Swimming Gala",
     context: "[placeholder — add event context]",
-    image: "/images/leadership/swimming-gala.png",
+    gallery: [{ type: "image", src: "/images/leadership/swimming-gala.png", alt: "Swimming Gala" }],
   },
   {
     role: "Teachers' Day",
     context: "[placeholder — add event context]",
-    image: "/images/leadership/teachers-day.png",
+    gallery: [{ type: "image", src: "/images/leadership/teachers-day.png", alt: "Teachers' Day" }],
+  },
+  {
+    role: "Inter-House Sports",
+    context: "[placeholder — add event context]",
+    gallery: [
+      { type: "image", src: "/images/leadership/interhouse-football.png", alt: "Inter-house football" },
+      { type: "image", src: "/images/leadership/interhouse-table-tennis.png", alt: "Inter-house table tennis" },
+    ],
   },
 ];
 
@@ -152,16 +222,20 @@ export const tspClub = {
   name: "Tech-Sociopreneurship Club (TSP)",
   description:
     'Co-founded with classmates Divina Minocha and Lavanya Gupta, the Tech-Sociopreneurship Club blends AI, business, and social entrepreneurship into a two-semester curriculum, including mock investor panels. Club meeting minutes trace its own path from early brainstorming to a concrete concept, "StudyCycle" (a credit-based textbook and notes marketplace), showcased at a school-wide investor-pitch exhibition, "Business Bazaar."',
-  image: {
-    src: "/images/tsp-club/founders-forum.png",
-    alt: "Tech-Sociopreneurship Club members at the Founders Forum",
-  },
+  gallery: [
+    { type: "image", src: "/images/tsp-club/founders-forum.png", alt: "Tech-Sociopreneurship Club members at the Founders Forum" },
+    { type: "image", src: "/images/tsp-club/club-meeting.png", alt: "Tech-Sociopreneurship Club meeting" },
+    { type: "image", src: "/images/tsp-club/ideation-session.png", alt: "Tech-Sociopreneurship Club ideation session" },
+    { type: "image", src: "/images/tsp-club/judging-rubric.png", alt: "Founders Forum judging rubric" },
+  ] satisfies MediaItem[],
+  documents: [{ title: "Club Proposal", href: "/documents/tsp-club/tsp-club-proposal.pdf" }] as DocumentItem[],
 };
 
 export const internship = {
   title: "BondboT — AI Support Chatbot",
   description:
     "Built with fellow interns Diya and Grace for a bond-trading platform, BondboT is a rulebook-grounded support chatbot, built with Zapier, designed to help a growing platform scale customer support without scaling headcount.",
+  documents: [{ title: "BondboT Presentation", href: "/documents/internship/bondbot-presentation.pdf" }] as DocumentItem[],
 };
 
 export type AwardItem = {

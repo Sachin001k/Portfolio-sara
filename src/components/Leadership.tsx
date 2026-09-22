@@ -1,4 +1,5 @@
-import Image from "next/image";
+import { DocumentLinks } from "@/components/DocumentLink";
+import { Gallery } from "@/components/Gallery";
 import { internship, schoolRoles, tspClub } from "@/content/site";
 
 export function Leadership() {
@@ -10,25 +11,18 @@ export function Leadership() {
         <h3 className="mt-10 font-display text-xl text-ink/70">
           School Leadership
         </h3>
-        <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-4 grid gap-6 sm:grid-cols-2">
           {schoolRoles.map((item) => (
             <div
               key={item.role}
-              className="overflow-hidden rounded-2xl border border-ink/10 bg-cream"
+              className="overflow-hidden rounded-2xl border border-ink/10 bg-cream p-4"
             >
-              <div className="relative aspect-[4/3]">
-                <Image
-                  src={item.image}
-                  alt={item.role}
-                  fill
-                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="p-4">
-                <h4 className="font-display text-lg">{item.role}</h4>
-                <p className="mt-1 text-sm text-ink/65">{item.context}</p>
-              </div>
+              <Gallery
+                items={item.gallery}
+                columns={item.gallery.length > 1 ? "grid-cols-2" : "grid-cols-1"}
+              />
+              <h4 className="mt-4 font-display text-lg">{item.role}</h4>
+              <p className="mt-1 text-sm text-ink/65">{item.context}</p>
             </div>
           ))}
         </div>
@@ -42,14 +36,9 @@ export function Leadership() {
             <p className="mt-3 leading-relaxed text-ink/75">
               {tspClub.description}
             </p>
-            <div className="relative mt-5 aspect-video overflow-hidden rounded-2xl bg-sand">
-              <Image
-                src={tspClub.image.src}
-                alt={tspClub.image.alt}
-                fill
-                sizes="(min-width: 768px) 50vw, 100vw"
-                className="object-cover"
-              />
+            <DocumentLinks documents={tspClub.documents} />
+            <div className="mt-5">
+              <Gallery items={tspClub.gallery} />
             </div>
           </div>
 
@@ -59,6 +48,7 @@ export function Leadership() {
             <p className="mt-3 leading-relaxed text-ink/75">
               {internship.description}
             </p>
+            <DocumentLinks documents={internship.documents} />
           </div>
         </div>
       </div>

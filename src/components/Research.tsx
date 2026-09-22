@@ -1,4 +1,5 @@
-import Image from "next/image";
+import { DocumentLinks } from "@/components/DocumentLink";
+import { Gallery } from "@/components/Gallery";
 import { research } from "@/content/site";
 
 export function Research() {
@@ -32,22 +33,11 @@ export function Research() {
                 </ul>
               )}
 
-              {item.images.length > 0 && (
-                <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
-                  {item.images.map((image) => (
-                    <div
-                      key={image.src}
-                      className="relative aspect-square overflow-hidden rounded-xl bg-sand"
-                    >
-                      <Image
-                        src={image.src}
-                        alt={image.alt}
-                        fill
-                        sizes="(min-width: 640px) 33vw, 50vw"
-                        className="object-cover"
-                      />
-                    </div>
-                  ))}
+              <DocumentLinks documents={item.documents} />
+
+              {item.gallery.length > 0 && (
+                <div className="mt-6">
+                  <Gallery items={item.gallery} />
                 </div>
               )}
             </article>

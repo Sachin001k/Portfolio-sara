@@ -168,9 +168,73 @@ The site has been rebuilt with this real content. What changed:
   mis-handle them).
 - Pick 1 real photo of Sara for the Hero (currently a placeholder
   monogram).
-- Choose a small curated set of photos/video clips per section rather
-  than dumping every file — several folders have many near-duplicate
-  shots.
-- Videos (`.mp4`/`.mov`) are large; will need either compression or an
-  external host (e.g. YouTube embed) rather than serving them raw from
-  `public/`.
+- ~~Choose a small curated set of photos/video clips per section~~ —
+  superseded: expanded to galleries covering nearly every remaining
+  file (see below).
+- ~~Videos are large; will need compression or an external host~~ —
+  superseded: `.mov` files were transcoded to `.mp4` with `ffmpeg` and
+  are served directly from `public/videos/` with generated poster
+  thumbnails so galleries don't need to fetch full video files just to
+  show a thumbnail.
+
+## Round 2 — full galleries + document preview/download (done 2026-09-22)
+
+The user pointed out most source files still weren't on the site (this
+was intentional curation, not the naming bug) and asked for two things:
+richer per-section media, and a way to preview + download the original
+documents (research papers, EquiPointe poster/logbook/deck, EduBeats
+reports) instead of only text summaries.
+
+**New local tools installed** (both via Homebrew, needed since this
+Mac had no docx/pptx → PDF converter): `libreoffice` (provides
+`soffice --headless --convert-to pdf`, used to convert every `.docx`/
+`.pptx` we expose into a previewable PDF) and `ffmpeg` (used to
+transcode `.mov` test-footage clips to `.mp4`, and to extract poster-
+frame thumbnails for every video). `poppler` was also installed but
+only for my own QA (rendering PDF pages to check them) — not a site
+dependency.
+
+**What changed:**
+
+- `src/components/Gallery.tsx` — new reusable lightbox: a grid of
+  image/video thumbnails that opens a `<dialog>` modal with Prev/Next
+  navigation on click. Used by Research (EquiPointe), Dance & Movement
+  (Ballet, Movement Literacy), and each Leadership school-role card.
+- `src/components/DocumentLink.tsx` — new `DocumentLinks` component:
+  renders a pill button per document; clicking it opens a `<dialog>`
+  with the PDF embedded in an `<iframe>` plus a Download button. Used
+  by EduBeats, EquiPointe, Research Papers, the TSP Club, and the
+  BondboT internship.
+- `public/documents/` — 9 PDFs: the 3 that were already PDFs were
+  copied as-is (EquiPointe logbook, poster; EduBeats/CREST report); the
+  other 6 (`.docx`/`.pptx`) were converted with `soffice`.
+- `public/videos/` — now 9 videos total: all 6 Ballet clips (was 1),
+  2 EquiPointe testing clips (transcoded from `.mov`), and the
+  School_leadership march-past video (folded into the "Sports Day
+  House Captain" card, since it's the same event). Each has a
+  generated poster thumbnail in `public/images/ballet/`,
+  `public/images/equipointe/`, or `public/images/misc/`.
+- `public/images/` — added the remaining EquiPointe hardware photos
+  (including the earlier full-leg-sensor prototype iteration, `IMG_
+  0884.jpeg` — useful since the copy explicitly mentions "two hardware
+  iterations"), 3 more Movement_Literacy session photos, 3 more TSP
+  club photos, and 3 more School_leadership photos (2 more Panthers
+  house-spirit shots folded into that card's gallery, Interhouse
+  football/table tennis folded into a new "Inter-House Sports" card).
+- `src/content/site.ts` — every relevant entry now carries a `gallery:
+  MediaItem[]` and/or `documents: DocumentItem[]` array instead of a
+  single image.
+- Only 2 files were deliberately still left out: `Entrepreneurship Club
+  MOM.docx` (internal club meeting minutes — informal, not written for
+  publication) and the near-duplicate/junk files already flagged
+  earlier (e.g. `IMG_0840 2.jpeg`, the extra `Founders forum_(1).png`).
+  M&TSI stays fully excluded, unchanged.
+- Verified: build + lint clean; headless-browser testing confirmed the
+  gallery lightbox opens/navigates correctly and the document modal's
+  DOM is correct (dialog opens, iframe `src` and download `href` both
+  point at the right PDF). The PDF preview itself renders as a blank
+  iframe in my headless test browser — that's a known Playwright/
+  headless-Chromium limitation (no bundled PDF viewer plugin), not a
+  site bug; real browsers (Chrome, Safari, Firefox, Edge) all render
+  PDFs in an `<iframe>` natively. Worth a manual check in a real
+  browser once deployed, just to be sure.
