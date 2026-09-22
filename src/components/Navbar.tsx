@@ -1,13 +1,15 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { siteConfig } from "@/content/site";
 
 const links = [
   { href: "#about", label: "About" },
-  { href: "#experience", label: "Experience" },
-  { href: "#projects", label: "Projects" },
-  { href: "#media", label: "Media" },
+  { href: "#research", label: "Research" },
+  { href: "#dance", label: "Dance" },
+  { href: "#leadership", label: "Leadership" },
+  { href: "#awards", label: "Awards" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -17,12 +19,12 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-ink/10 bg-cream/90 backdrop-blur">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a
-          href="#top"
+        <Link
+          href="/"
           className="font-display text-xl font-medium tracking-tight"
         >
           {siteConfig.name}
-        </a>
+        </Link>
 
         <ul className="hidden gap-8 text-sm font-medium md:flex">
           {links.map((link) => (

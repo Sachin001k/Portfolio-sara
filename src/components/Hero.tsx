@@ -4,10 +4,7 @@ export function Hero() {
   const initial = siteConfig.name.charAt(0).toUpperCase();
 
   return (
-    <section
-      id="top"
-      className="mx-auto grid max-w-6xl gap-12 px-6 py-16 md:grid-cols-[1.1fr_0.9fr] md:items-center md:py-24"
-    >
+    <section className="mx-auto grid max-w-6xl gap-12 px-6 py-16 md:grid-cols-[1.1fr_0.9fr] md:items-center md:py-24">
       <div>
         <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-clay">
           {siteConfig.pronouns}

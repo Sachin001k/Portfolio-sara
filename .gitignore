@@ -37,6 +37,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# raw personal source material (photos/videos/documents) — never commit,
+# curated copies live in public/images and public/videos instead
+/Sara_Hulyalkar*
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
