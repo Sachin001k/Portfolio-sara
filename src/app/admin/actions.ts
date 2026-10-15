@@ -45,7 +45,6 @@ const REQUIRED_KEYS: (keyof SiteContent)[] = [
   "ballet",
   "movementLiteracy",
   "schoolRoles",
-  "tspClub",
   "internship",
   "awards",
 ];

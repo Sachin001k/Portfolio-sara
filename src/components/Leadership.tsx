@@ -1,18 +1,12 @@
 import { DocumentLinks } from "@/components/DocumentLink";
 import { Gallery } from "@/components/Gallery";
-import type {
-  Internship,
-  SchoolRoleItem,
-  TspClub,
-} from "@/content/site";
+import type { Internship, SchoolRoleItem } from "@/content/site";
 
 export function Leadership({
   schoolRoles,
-  tspClub,
   internship,
 }: {
   schoolRoles: SchoolRoleItem[];
-  tspClub: TspClub;
   internship: Internship;
 }) {
   return (
@@ -33,12 +27,18 @@ export function Leadership({
                 key={item.role}
                 className={`overflow-hidden rounded-2xl border border-ink/10 bg-cream p-4 sm:p-5 ${wide ? "sm:col-span-2" : ""}`}
               >
+                {item.label && (
+                  <span className="mb-2 inline-block rounded-full bg-clay/15 px-3 py-0.5 text-xs font-semibold uppercase tracking-wide text-clay-dark">
+                    {item.label}
+                  </span>
+                )}
                 <h4 className="font-display text-lg">{item.role}</h4>
                 {item.context && (
                   <p className="mt-1 max-w-3xl text-sm text-ink/65">
                     {item.context}
                   </p>
                 )}
+                {item.documents && <DocumentLinks documents={item.documents} />}
                 {item.gallery.length > 0 && (
                   <div className="mt-4">
                     <Gallery
@@ -58,29 +58,13 @@ export function Leadership({
           })}
         </div>
 
-        <div className="mt-14 grid gap-10 md:grid-cols-2">
-          <div>
-            <h3 className="font-display text-xl text-ink/70">
-              Club &amp; Community
-            </h3>
-            <h4 className="mt-3 font-display text-2xl">{tspClub.name}</h4>
-            <p className="mt-3 leading-relaxed text-ink/75">
-              {tspClub.description}
-            </p>
-            <DocumentLinks documents={tspClub.documents} />
-            <div className="mt-5">
-              <Gallery items={tspClub.gallery} />
-            </div>
-          </div>
-
-          <div>
-            <h3 className="font-display text-xl text-ink/70">Internship</h3>
-            <h4 className="mt-3 font-display text-2xl">{internship.title}</h4>
-            <p className="mt-3 leading-relaxed text-ink/75">
-              {internship.description}
-            </p>
-            <DocumentLinks documents={internship.documents} />
-          </div>
+        <div className="mt-14 max-w-3xl">
+          <h3 className="font-display text-xl text-ink/70">Internship</h3>
+          <h4 className="mt-3 font-display text-2xl">{internship.title}</h4>
+          <p className="mt-3 leading-relaxed text-ink/75">
+            {internship.description}
+          </p>
+          <DocumentLinks documents={internship.documents} />
         </div>
       </div>
     </section>

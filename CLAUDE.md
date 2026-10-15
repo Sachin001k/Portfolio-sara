@@ -308,3 +308,55 @@ title and caption above its photos.
 Sara's portrait (supplied by the user in chat) is at
 `public/images/profile/sara-portrait.jpg`, set via `siteConfig.photo`; the
 "S" monogram only shows if `photo` is empty.
+
+## DAIMUN 2026 photos (done 2026-10-15)
+
+The user supplied two DAIMUN 2026 group photos; they are now the MUN Head
+Chair card gallery (`public/images/leadership/daimun-2026-{1,2}.jpg`). This
+resolves brief item 06's photo. The role source and theme are still unconfirmed.
+
+## Awards additions (done 2026-10-15)
+
+The user approved adding exactly two awards from Sara's Drive ("Sara
+Hulyalkar Awards" folder plus her M&TSI folder), and said NOT to add the
+Subject Achievement awards:
+- **M&TSI Summer Scholar** (UPenn Management & Technology Summer
+  Institute, 2026; scored 92.07% A-), with photo `public/images/awards/
+  mtsi-summer-scholar.jpg` (from `M&TSI/mtsi.jpeg`). This supersedes the
+  earlier "keep M&TSI off the site" decision for this card only.
+- **Academic Excellence Award** (40+/42 in both terms, Class 11). No
+  image exists, so it's a text-only card; the awards grid uses
+  `items-start` so it isn't stretched.
+Wording comes from Sara's résumé (Drive: "Sara_Hulyalkar_Resume.docx
+(1).pdf", 13 Oct 2026).
+
+## Zoomable images (done 2026-10-15)
+
+Every image opens in an in-site lightbox with click/tap-to-zoom (2.5x,
+pans with the pointer or a finger drag): gallery photos via `Gallery`,
+and single images (hero portrait, award images) via `ZoomableImage`
+(`src/components/ZoomImage.tsx`). `next.config.ts` allows image quality
+90 for the zoom view.
+
+## Copy updates (2026-10-15)
+
+The user supplied new EquiPointe and TSP Club descriptions, now used
+verbatim except one grammar fix ("sensor detect" changed to "detects").
+Side effects: the EquiPointe text no longer credits Anshul Bhatt or
+quotes the 80–89% accuracy figure, and the TSP text says "I founded and
+led" with no co-founders named. About Me still says "co-founding a
+school club"; this inconsistency was flagged to the user.
+
+## TSP moved under School Leadership (done 2026-10-15, from Sara/Sachin call)
+
+The "Club & Community" heading is gone. The Tech-Sociopreneurship Club
+is now a School Leadership card (a `schoolRoles` entry with `label:
+"Club"`, its write-up, the Club Proposal document and 4 photos). Order:
+House Captain, then TSP, then MUN Head Chair, per the call's action item
+"place TSP before MUN". The call summary contradicted this, so confirm
+with Sara. The `tspClub` / `TspClub` content key was removed;
+`SchoolRoleItem` gained optional `label` and `documents`. Internship now
+sits alone below School Leadership.
+Still waiting on Sara: 2 new videos with headings and captions, dates
+and pictures via WhatsApp, and possibly a rewritten club section in a
+new Google Doc.

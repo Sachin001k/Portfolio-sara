@@ -92,7 +92,7 @@ export const research: ResearchItem[] = [
     tag: "Wearable Hardware · Ballet Science",
     title: "EquiPointe",
     description:
-      'An IMU + FSR-based wearable system, built with research partner Anshul Bhatt, that quantifies unsafe ballet footwork in real time — specifically sickling and rolling, two of the most common causes of dancer injury. Two hardware iterations (an early full-leg sensor rig, then a refined shoe-only build with FSR402 pressure sensors + an MPU6050 IMU + a Madgwick filter) reached 80–89% accuracy classifying risky footwork, backed by a custom live-calibration dashboard for capturing and logging session data.',
+      "EquiPointe is a wearable technology project combining biomechanics, embedded sensing, and machine learning to improve ballet technique and reduce injury risk. An externally mounted IMU sensor detects ankle sickling and rolling, translating movement data into actionable insights through a risk-analysis dashboard and corrective training videos. The project explores how real-time sensor analytics can make dance training more objective and personalized, bridging engineering innovation with performing arts.",
     bullets: [
       "Includes a full literature-review logbook and a conference-style presentation poster",
       "Custom dashboard software for live sensor calibration and session data capture",
@@ -190,8 +190,11 @@ export const movementLiteracy: TextSection = {
 };
 
 export type SchoolRoleItem = {
+  /** Small label above the title, e.g. "Club". */
+  label?: string;
   role: string;
   context: string;
+  documents?: DocumentItem[];
   gallery: MediaItem[];
 };
 
@@ -214,26 +217,27 @@ export const schoolRoles: SchoolRoleItem[] = [
     ],
   },
   {
+    label: "Club",
+    role: "Tech-Sociopreneurship Club (TSP)",
+    context:
+      "I founded and led DAIS's Tech-Sociopreneurship Club, mentoring 12 student ventures in technology-driven innovation, business model development, and social impact. I onboarded 5 judges and organized Founders' Forum, showcasing 3 winning social enterprises that applied entrepreneurial thinking to community challenges.",
+    documents: [{ title: "Club Proposal", href: "/documents/tsp-club/tsp-club-proposal.pdf" }],
+    gallery: [
+      { type: "image", src: "/images/tsp-club/founders-forum.png", alt: "Tech-Sociopreneurship Club members at the Founders Forum" },
+      { type: "image", src: "/images/tsp-club/club-meeting.png", alt: "Tech-Sociopreneurship Club meeting" },
+      { type: "image", src: "/images/tsp-club/ideation-session.png", alt: "Tech-Sociopreneurship Club ideation session" },
+      { type: "image", src: "/images/tsp-club/judging-rubric.png", alt: "Founders Forum judging rubric" },
+    ],
+  },
+  {
     role: "MUN Head Chair",
     context: "Head Chair at DAIMUN 2026",
-    // [pending] verified DAIMUN 2026 photo (alt: "MUN Head Chair at DAIMUN
-    // 2026") — the old image shows the 2025 event, so it's left off
-    gallery: [],
+    gallery: [
+      { type: "image", src: "/images/leadership/daimun-2026-1.jpg", alt: "MUN Head Chair at DAIMUN 2026" },
+      { type: "image", src: "/images/leadership/daimun-2026-2.jpg", alt: "MUN Head Chair at DAIMUN 2026" },
+    ],
   },
 ];
-
-export const tspClub: TspClub = {
-  name: "Tech-Sociopreneurship Club (TSP)",
-  description:
-    'Co-founded with classmates Divina Minocha and Lavanya Gupta, the Tech-Sociopreneurship Club blends AI, business, and social entrepreneurship into a two-semester curriculum, including mock investor panels. Club meeting minutes trace its own path from early brainstorming to a concrete concept, "StudyCycle" (a credit-based textbook and notes marketplace), showcased at a school-wide investor-pitch exhibition, "Business Bazaar."',
-  gallery: [
-    { type: "image", src: "/images/tsp-club/founders-forum.png", alt: "Tech-Sociopreneurship Club members at the Founders Forum" },
-    { type: "image", src: "/images/tsp-club/club-meeting.png", alt: "Tech-Sociopreneurship Club meeting" },
-    { type: "image", src: "/images/tsp-club/ideation-session.png", alt: "Tech-Sociopreneurship Club ideation session" },
-    { type: "image", src: "/images/tsp-club/judging-rubric.png", alt: "Founders Forum judging rubric" },
-  ],
-  documents: [{ title: "Club Proposal", href: "/documents/tsp-club/tsp-club-proposal.pdf" }],
-};
 
 export const internship: Internship = {
   // [pending] confirm company spelling (BondbloX vs BondBloxx)
@@ -241,13 +245,6 @@ export const internship: Internship = {
   description:
     "During my internship at BondbloX, I gained exposure to the intersection of financial services, technology, and business. The experience helped me explore how financial products are developed and delivered, and how technology can make financial markets more accessible and efficient. My internship culminated in creating an AI-based chatbot for the BondbloX website and a bond recommendation engine to be included on the website.",
   documents: [{ title: "BondboT Presentation", href: "/documents/internship/bondbot-presentation.pdf" }],
-};
-
-export type TspClub = {
-  name: string;
-  description: string;
-  gallery: MediaItem[];
-  documents: DocumentItem[];
 };
 
 export type Internship = {
@@ -275,9 +272,20 @@ export const awards: AwardItem[] = [
     image: "/images/edubeats/st-yau-shortlist.png",
   },
   {
+    title: "M&TSI Summer Scholar",
+    issuer:
+      "Management & Technology Summer Institute, University of Pennsylvania (2026). Selected for the pre-college program; scored 92.07% (A-).",
+    image: "/images/awards/mtsi-summer-scholar.jpg",
+  },
+  {
     title: "Excellence in STEM",
     issuer: "DAIS Annual Awards Ceremony 2025–26, Class 11",
     image: "/images/awards/excellence-in-stem.png",
+  },
+  {
+    title: "Academic Excellence Award",
+    issuer: "For scoring 40+/42 in both terms, Class 11",
+    image: "",
   },
 ];
 
@@ -290,7 +298,6 @@ export type SiteContent = {
   ballet: TextSection;
   movementLiteracy: TextSection;
   schoolRoles: SchoolRoleItem[];
-  tspClub: TspClub;
   internship: Internship;
   awards: AwardItem[];
 };
@@ -302,7 +309,6 @@ export const defaultContent: SiteContent = {
   ballet,
   movementLiteracy,
   schoolRoles,
-  tspClub,
   internship,
   awards,
 };

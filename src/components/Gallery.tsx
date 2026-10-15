@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useRef, useState } from "react";
+import { ZoomImage } from "@/components/ZoomImage";
 
 export type MediaItem =
   | { type: "image"; src: string; alt: string }
@@ -96,13 +97,7 @@ export function Gallery({
 
           <div className="relative h-[80vh] w-full overflow-hidden rounded-t-2xl bg-black">
             {!isOpen ? null : active.type === "image" ? (
-              <Image
-                src={active.src}
-                alt={active.alt}
-                fill
-                sizes="90vw"
-                className="object-contain"
-              />
+              <ZoomImage key={active.src} src={active.src} alt={active.alt} />
             ) : (
               <video
                 key={active.src}

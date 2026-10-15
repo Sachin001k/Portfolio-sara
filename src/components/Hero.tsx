@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ZoomableImage } from "@/components/ZoomImage";
 import { hasContact, type SiteConfig } from "@/content/site";
 
 export function Hero({ config: siteConfig }: { config: SiteConfig }) {
@@ -49,7 +50,11 @@ export function Hero({ config: siteConfig }: { config: SiteConfig }) {
       </div>
 
       {siteConfig.photo ? (
-        <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-[2.5rem] bg-sand shadow-[0_20px_50px_-20px_rgba(36,31,28,0.35)]">
+        <ZoomableImage
+          src={siteConfig.photo}
+          alt={siteConfig.name}
+          className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-[2.5rem] bg-sand shadow-[0_20px_50px_-20px_rgba(36,31,28,0.35)]"
+        >
           <Image
             src={siteConfig.photo}
             alt={siteConfig.name}
@@ -58,7 +63,7 @@ export function Hero({ config: siteConfig }: { config: SiteConfig }) {
             sizes="(min-width: 768px) 24rem, 90vw"
             className="object-cover object-[50%_25%]"
           />
-        </div>
+        </ZoomableImage>
       ) : (
         <div className="mx-auto flex aspect-square w-full max-w-sm items-center justify-center rounded-[2.5rem] bg-gradient-to-br from-sand via-clay/20 to-moss/20">
           <span className="font-display text-9xl text-clay-dark/70">

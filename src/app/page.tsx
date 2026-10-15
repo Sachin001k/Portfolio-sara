@@ -27,7 +27,6 @@ export default async function Home() {
         />
         <Leadership
           schoolRoles={content.schoolRoles}
-          tspClub={content.tspClub}
           internship={content.internship}
         />
         <Awards awards={content.awards} />

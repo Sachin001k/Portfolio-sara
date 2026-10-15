@@ -26,7 +26,6 @@ const SECTIONS = [
   { id: "ballet", label: "Ballet" },
   { id: "movement", label: "Movement Literacy" },
   { id: "school", label: "School Leadership" },
-  { id: "club", label: "Club" },
   { id: "internship", label: "Internship" },
   { id: "awards", label: "Awards" },
 ];
@@ -332,7 +331,7 @@ export function AdminEditor({
           <div id="school">
             <Panel
               title="School Leadership"
-              description="Each role is a card. Leave the caption empty to hide it."
+              description="Each role or club is a card, shown in this order. Leave the caption empty to hide it."
             >
               <ItemList<SchoolRoleItem>
                 items={content.schoolRoles}
@@ -348,11 +347,20 @@ export function AdminEditor({
                       onChange={(role) => setItem({ ...item, role })}
                     />
                     <TextField
+                      label="Label (optional small pill, e.g. “Club”)"
+                      value={item.label ?? ""}
+                      onChange={(label) => setItem({ ...item, label })}
+                    />
+                    <TextField
                       label="Caption"
                       multiline
                       rows={3}
                       value={item.context}
                       onChange={(context) => setItem({ ...item, context })}
+                    />
+                    <DocumentListEditor
+                      items={item.documents ?? []}
+                      onChange={(documents) => setItem({ ...item, documents })}
                     />
                     <MediaListEditor
                       label="Photos & videos"
@@ -361,38 +369,6 @@ export function AdminEditor({
                     />
                   </>
                 )}
-              />
-            </Panel>
-          </div>
-
-          <div id="club">
-            <Panel title="Club & Community">
-              <TextField
-                label="Club name"
-                value={content.tspClub.name}
-                onChange={(name) => set("tspClub", { ...content.tspClub, name })}
-              />
-              <TextField
-                label="Description"
-                multiline
-                rows={6}
-                value={content.tspClub.description}
-                onChange={(description) =>
-                  set("tspClub", { ...content.tspClub, description })
-                }
-              />
-              <DocumentListEditor
-                items={content.tspClub.documents}
-                onChange={(documents) =>
-                  set("tspClub", { ...content.tspClub, documents })
-                }
-              />
-              <MediaListEditor
-                label="Photos & videos"
-                items={content.tspClub.gallery}
-                onChange={(gallery) =>
-                  set("tspClub", { ...content.tspClub, gallery })
-                }
               />
             </Panel>
           </div>
