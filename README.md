@@ -20,8 +20,8 @@ other code needs to change. Fields marked `[pending]` are waiting on
 confirmation; empty ones (résumé link, email, socials, captions) are
 simply hidden on the page until filled in.
 
-To swap the hero placeholder (the big letter "S") for a real photo, add
-an image to `public/` and update [src/components/Hero.tsx](src/components/Hero.tsx).
+The hero portrait is `siteConfig.photo` in `src/content/site.ts` (the
+"S" monogram shows if it's empty).
 
 ## Environment variables
 

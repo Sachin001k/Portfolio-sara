@@ -10,6 +10,8 @@ import type { DocumentItem } from "@/components/DocumentLink";
 
 export type SiteConfig = {
   name: string;
+  /** Hero portrait; the "S" monogram shows while this is empty. */
+  photo: string;
   pronouns: string;
   tags: string[];
   heroIntro: string;
@@ -27,6 +29,7 @@ export type TextSection = {
 
 export const siteConfig: SiteConfig = {
   name: "Sara Hulyalkar",
+  photo: "/images/profile/sara-portrait.jpg",
   pronouns: "she/her",
   tags: ["Ballet Dancer", "STEM Researcher", "Student Innovator"],
   heroIntro:
@@ -194,52 +197,28 @@ export type SchoolRoleItem = {
 
 export const schoolRoles: SchoolRoleItem[] = [
   {
+    role: "House Captain — Panthers House",
+    context:
+      "House Captain of Panthers House. Elected by a school-wide teacher panel. Led 250+ students; organised inter-house competitions and campus engagement initiatives.",
+    gallery: [
+      { type: "image", src: "/images/leadership/student-council.png", alt: "Student Council — Sara Hulyalkar, Panther House Captain" },
+      { type: "image", src: "/images/leadership/sports-day-house-captain.png", alt: "Leading Panthers house on Sports Day" },
+      { type: "video", src: "/videos/march-past.mp4", poster: "/images/misc/march-past-poster.jpg", alt: "Sports Day march past — first place" },
+      { type: "image", src: "/images/leadership/house-spirit.png", alt: "House Spirit day, Panthers house" },
+      { type: "image", src: "/images/leadership/house-spirit-2.png", alt: "House Spirit day, Panthers house" },
+      { type: "image", src: "/images/leadership/house-spirit-3.png", alt: "Annual Athletic Meet, Panthers house" },
+      { type: "image", src: "/images/leadership/swimming-gala.png", alt: "Swimming Gala" },
+      { type: "image", src: "/images/leadership/teachers-day.png", alt: "Teachers' Day" },
+      { type: "image", src: "/images/leadership/interhouse-football.png", alt: "Inter-house football" },
+      { type: "image", src: "/images/leadership/interhouse-table-tennis.png", alt: "Inter-house table tennis" },
+    ],
+  },
+  {
     role: "MUN Head Chair",
     context: "Head Chair at DAIMUN 2026",
     // [pending] verified DAIMUN 2026 photo (alt: "MUN Head Chair at DAIMUN
     // 2026") — the old image shows the 2025 event, so it's left off
     gallery: [],
-  },
-  {
-    role: "Student Council",
-    context:
-      "House Captain of Panthers House. Elected by a school-wide teacher panel. Led 250+ students; organised inter-house competitions and campus engagement initiatives.",
-    gallery: [{ type: "image", src: "/images/leadership/student-council.png", alt: "Student Council" }],
-  },
-  {
-    role: "Sports Day House Captain",
-    context: "", // [pending] confirmed caption
-    gallery: [
-      { type: "image", src: "/images/leadership/sports-day-house-captain.png", alt: "Sports Day House Captain" },
-      { type: "video", src: "/videos/march-past.mp4", poster: "/images/misc/march-past-poster.jpg", alt: "March past — first place" },
-    ],
-  },
-  {
-    role: "House Spirit — Panthers",
-    context: "", // [pending] confirmed caption
-    gallery: [
-      { type: "image", src: "/images/leadership/house-spirit.png", alt: "House Spirit day, Panthers house" },
-      { type: "image", src: "/images/leadership/house-spirit-2.png", alt: "House Spirit day, Panthers house" },
-      { type: "image", src: "/images/leadership/house-spirit-3.png", alt: "Annual Athletic Meet, Panthers house" },
-    ],
-  },
-  {
-    role: "Swimming Gala",
-    context: "", // [pending] confirmed caption
-    gallery: [{ type: "image", src: "/images/leadership/swimming-gala.png", alt: "Swimming Gala" }],
-  },
-  {
-    role: "Teachers' Day",
-    context: "", // [pending] confirmed caption
-    gallery: [{ type: "image", src: "/images/leadership/teachers-day.png", alt: "Teachers' Day" }],
-  },
-  {
-    role: "Inter-House Sports",
-    context: "", // [pending] confirmed caption
-    gallery: [
-      { type: "image", src: "/images/leadership/interhouse-football.png", alt: "Inter-house football" },
-      { type: "image", src: "/images/leadership/interhouse-table-tennis.png", alt: "Inter-house table tennis" },
-    ],
   },
 ];
 

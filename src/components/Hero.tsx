@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { hasContact, type SiteConfig } from "@/content/site";
 
 export function Hero({ config: siteConfig }: { config: SiteConfig }) {
@@ -47,11 +48,24 @@ export function Hero({ config: siteConfig }: { config: SiteConfig }) {
         </div>
       </div>
 
-      <div className="mx-auto flex aspect-square w-full max-w-sm items-center justify-center rounded-[2.5rem] bg-gradient-to-br from-sand via-clay/20 to-moss/20">
-        <span className="font-display text-9xl text-clay-dark/70">
-          {initial}
-        </span>
-      </div>
+      {siteConfig.photo ? (
+        <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-[2.5rem] bg-sand shadow-[0_20px_50px_-20px_rgba(36,31,28,0.35)]">
+          <Image
+            src={siteConfig.photo}
+            alt={siteConfig.name}
+            fill
+            priority
+            sizes="(min-width: 768px) 24rem, 90vw"
+            className="object-cover object-[50%_25%]"
+          />
+        </div>
+      ) : (
+        <div className="mx-auto flex aspect-square w-full max-w-sm items-center justify-center rounded-[2.5rem] bg-gradient-to-br from-sand via-clay/20 to-moss/20">
+          <span className="font-display text-9xl text-clay-dark/70">
+            {initial}
+          </span>
+        </div>
+      )}
     </section>
   );
 }

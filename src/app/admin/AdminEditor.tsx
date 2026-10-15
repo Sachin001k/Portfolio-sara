@@ -159,6 +159,14 @@ export function AdminEditor({
                 value={siteConfig.name}
                 onChange={(name) => setConfig({ name })}
               />
+              <FileField
+                label="Profile photo"
+                kind="image"
+                accept="image/jpeg,image/png,image/webp"
+                value={siteConfig.photo}
+                onChange={(photo) => setConfig({ photo })}
+                hint="Shown in the hero. A portrait (taller than wide) works best."
+              />
               <TextField
                 label="Pronouns"
                 value={siteConfig.pronouns}

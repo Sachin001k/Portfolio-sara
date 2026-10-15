@@ -292,3 +292,19 @@ actually show Comp-220 — it ends at Comp-213), other award additions,
   didn't resolve; likely paused). The user is restoring it. Login, save
   and upload are untested against a live Supabase until then. The UI,
   build, lint, and the offline fallback to defaults are verified.
+
+## Round 5: House Captain card (done 2026-10-15)
+
+At the user's request, the Student Council, Sports Day, House Spirit,
+Swimming Gala, Teachers' Day and Inter-House Sports cards were merged
+into one "House Captain — Panthers House" card (10 photos/videos), with
+the Profile Snapshot caption. That leaves the per-event caption
+questions moot. School-role cards with more than 4 media items now span
+the full row with a 4-column gallery, and every role card shows its
+title and caption above its photos.
+
+## Hero photo (done 2026-10-15)
+
+Sara's portrait (supplied by the user in chat) is at
+`public/images/profile/sara-portrait.jpg`, set via `siteConfig.photo`; the
+"S" monogram only shows if `photo` is empty.
