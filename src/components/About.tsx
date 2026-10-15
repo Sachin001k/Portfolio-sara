@@ -1,6 +1,12 @@
-import { about, siteConfig } from "@/content/site";
+import type { SiteContent } from "@/content/site";
 
-export function About() {
+export function About({
+  about,
+  resumeUrl,
+}: {
+  about: SiteContent["about"];
+  resumeUrl: string;
+}) {
   return (
     <section id="about" className="bg-sand/60 py-20">
       <div className="mx-auto max-w-3xl px-6">
@@ -12,12 +18,16 @@ export function About() {
           ))}
         </div>
 
-        <a
-          href={siteConfig.resumeUrl}
-          className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-clay-dark underline decoration-clay/40 underline-offset-4 transition-colors hover:text-clay"
-        >
-          View résumé →
-        </a>
+        {resumeUrl && (
+          <a
+            href={resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-clay-dark underline decoration-clay/40 underline-offset-4 transition-colors hover:text-clay"
+          >
+            View résumé →
+          </a>
+        )}
       </div>
     </section>
   );

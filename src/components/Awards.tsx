@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { awards } from "@/content/site";
+import type { AwardItem } from "@/content/site";
 
-export function Awards() {
+export function Awards({ awards }: { awards: AwardItem[] }) {
   return (
     <section id="awards" className="mx-auto max-w-5xl px-6 py-20">
       <h2 className="font-display text-4xl">Awards &amp; Recognition</h2>
@@ -12,15 +12,17 @@ export function Awards() {
             key={award.title}
             className="overflow-hidden rounded-2xl border border-ink/10 bg-sand/60"
           >
-            <div className="relative aspect-[4/3]">
-              <Image
-                src={award.image}
-                alt={award.title}
-                fill
-                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                className="object-cover"
-              />
-            </div>
+            {award.image && (
+              <div className="relative aspect-[4/3] bg-cream">
+                <Image
+                  src={award.image}
+                  alt={award.title}
+                  fill
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  className="object-contain p-2"
+                />
+              </div>
+            )}
             <div className="p-4">
               <h3 className="font-display text-lg">{award.title}</h3>
               <p className="mt-1 text-sm text-ink/65">{award.issuer}</p>

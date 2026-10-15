@@ -238,3 +238,57 @@ dependency.
   site bug; real browsers (Chrome, Safari, Firefox, Edge) all render
   PDFs in an `<iframe>` natively. Worth a manual check in a real
   browser once deployed, just to be sure.
+
+## Round 3 — developer change brief + bug fixes (done 2026-10-15)
+
+Applied the READY items from Khushi's "Sara portfolio | Developer change
+brief" (15 Oct 2026): hero `#projects` → `#research` (+ `scroll-padding-
+top` so headings clear the sticky navbar), title-case chips, new Class 12
+hero paragraph + About opening sentence, BondbloX internship copy,
+DAIMUN 2026 caption (2025 photo removed — don't reuse it), Student
+Council caption from the Profile Snapshot, "IRIS" codename removed from
+EquiPointe, awards reordered (CREST, S.T. Yau, Excellence in STEM).
+Placeholder captions/résumé/email/socials are now empty strings and are
+hidden on the page (Contact section, its nav link and the hero "Get in
+touch" button all disappear while there's no contact method).
+
+Bugs fixed: all 9 PDFs (~22MB) were downloading on page load (iframes
+now mount only when a document is opened); the first ballet video
+autoplayed with sound inside the closed lightbox and kept playing after
+closing (lightbox media now mounts only while open); award images were
+cropped with `object-cover` (now `object-contain`); placeholder page
+metadata ("storyteller, changemaker…").
+
+Still pending per the brief: approved résumé PDF, public email/socials,
+EduBeats 50-vs-208 sample, BondbloX spelling + whether the BondboT deck
+still fits the new copy, verified DAIMUN 2026 photo/source, IRIS finalist
+evidence, S.T. Yau official wording (and the shortlist screenshot doesn't
+actually show Comp-220 — it ends at Comp-213), other award additions,
+"since age three" vs 14 years, captions for the remaining school cards.
+
+## Round 4: admin panel + PDF reader (done 2026-10-15)
+
+- **Admin panel** at `/admin` (`src/app/admin/*`): Supabase Auth
+  email+password login, gated by the `ADMIN_EMAILS` allowlist
+  (`src/lib/admin.ts`; every server action re-checks it). Edits every
+  section in `SiteContent` (`src/content/site.ts`), including uploads.
+  Content is saved as `content.json` in the private `site-content`
+  bucket. Media goes to the public `site-media` bucket via signed upload
+  URLs, so big videos bypass the server-action body limit. The public
+  page reads it through `getContent()` (`src/lib/content.ts`), a
+  force-cached fetch tagged `site-content`; saving calls `updateTag` +
+  `revalidatePath("/")`. `src/proxy.ts` refreshes the session on
+  `/admin/*` only.
+- Components now take content as props from `app/page.tsx` instead of
+  importing constants. `site.ts` is now just the **defaults**: once
+  anything is saved in the admin, editing `site.ts` no longer changes the
+  live site for keys that exist in the saved JSON.
+- **PDF reader** (`src/components/PdfReader.tsx`) uses pdf.js to render
+  pages on the site's sand background instead of the browser's native
+  viewer. The worker is copied to `public/pdf.worker.min.mjs` by
+  `postinstall` (and lint-ignored).
+- About Me no longer repeats the hero's "I'm Sara… Class 12…" sentence.
+- **Status when built:** the Supabase project was unreachable (hostname
+  didn't resolve; likely paused). The user is restoring it. Login, save
+  and upload are untested against a live Supabase until then. The UI,
+  build, lint, and the offline fallback to defaults are verified.

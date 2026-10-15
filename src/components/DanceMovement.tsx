@@ -1,7 +1,13 @@
 import { Gallery } from "@/components/Gallery";
-import { ballet, movementLiteracy } from "@/content/site";
+import type { TextSection } from "@/content/site";
 
-export function DanceMovement() {
+export function DanceMovement({
+  ballet,
+  movementLiteracy,
+}: {
+  ballet: TextSection;
+  movementLiteracy: TextSection;
+}) {
   return (
     <section id="dance" className="mx-auto max-w-5xl px-6 py-20">
       <h2 className="font-display text-4xl">Dance &amp; Movement</h2>

@@ -20,6 +20,12 @@
   --font-sans: var(--font-sans);
 }
 
+html {
+  /* keep anchor targets clear of the sticky navbar */
+  scroll-padding-top: 5rem;
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--cream);
   color: var(--ink);

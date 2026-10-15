@@ -1,32 +1,54 @@
 // Sara Hulyalkar's portfolio content. Edit the values below — nothing
 // else in the codebase needs to change to update the site's text.
 //
-// Items marked "[placeholder]" are gaps in the source material (no
-// document explained them) — swap in the real detail when it's ready.
+// Items marked "[pending]" are waiting on confirmation from Sara/Khushi.
+// They're left empty (and hidden on the page) rather than shown as
+// placeholder text — fill them in once the detail is confirmed.
 
 import type { MediaItem } from "@/components/Gallery";
 import type { DocumentItem } from "@/components/DocumentLink";
 
-export const siteConfig = {
+export type SiteConfig = {
+  name: string;
+  pronouns: string;
+  tags: string[];
+  heroIntro: string;
+  location: string;
+  resumeUrl: string;
+  email: string;
+  socials: { label: string; href: string }[];
+};
+
+export type TextSection = {
+  heading: string;
+  description: string;
+  gallery: MediaItem[];
+};
+
+export const siteConfig: SiteConfig = {
   name: "Sara Hulyalkar",
   pronouns: "she/her",
-  tags: ["ballet dancer", "STEM researcher", "student innovator"],
+  tags: ["Ballet Dancer", "STEM Researcher", "Student Innovator"],
   heroIntro:
-    "I'm Sara — a Class 11 student at Dhirubhai Ambani International School who builds things at the intersection of ballet, learning science, and design. From a wearable sensor system that catches unsafe ballet footwork to an app that turns study notes into music, I like taking things I love and asking how they could work better.",
+    "I'm Sara, a Class 12 student at Dhirubhai Ambani International School who loves building at the intersection of engineering, business, and human experience. From developing wearable sensors to improve ballet technique to creating an app that turns study notes into music, I enjoy turning problems I care about into technological solutions. What excites me just as much as building a product is figuring out how to bring it to life: understanding the people it serves, designing a viable business model, and finding ways to scale its impact. I want to bridge the gap between what technology makes possible and what people actually need.",
   location: "Mumbai, India",
-  resumeUrl: "#",
-  email: "hello@example.com",
-  socials: {
-    instagram: "https://instagram.com/",
-    linkedin: "https://linkedin.com/in/",
-    youtube: "https://youtube.com/",
-  },
+  // Empty links are hidden; the Contact section (and its nav link / hero
+  // button) is hidden entirely while it has nothing to link to.
+  // [pending] approved résumé PDF (suggested path: /documents/resume.pdf)
+  resumeUrl: "",
+  // [pending] approved public email and profile URLs
+  email: "",
+  socials: [],
 };
+
+export function hasContact(config: SiteConfig) {
+  return config.email !== "" || config.socials.length > 0;
+}
 
 export const about = {
   heading: "About Me",
   paragraphs: [
-    "I'm Sara Hulyalkar, a Class 11 student at Dhirubhai Ambani International School. I've trained as a ballet dancer since I was three years old, and over the last few years I've kept finding myself drawn to one question: how do you take something you love — dance, studying, entrepreneurship — and rebuild it with better tools?",
+    "I've trained as a ballet dancer since I was three years old, and over the last few years I've kept finding myself drawn to one question: how do you take something you love — dance, studying, entrepreneurship — and rebuild it with better tools?",
     "That question has taken me from designing a wearable sensor system that flags unsafe ballet footwork, to building an app that turns study notes into music, to co-founding a school club that teaches students how to think like founders. I care about work that's rigorous enough to hold up as research and useful enough that real people actually want it.",
   ],
 };
@@ -45,7 +67,7 @@ export const research: ResearchItem[] = [
     tag: "EdTech · Science Award",
     title: "EduBeats",
     description:
-      "A semantic-to-music encoding system that turns study notes into personalised, neurodiversity-inclusive soundscapes. Phase 1 was a working prototype (Python, gTTS, pydub, librosa) tested with 208 students — 92.9% said it helped them retain material. Phase 2 built a novel NLP pipeline (spaCy, sentence-transformers, music21) that encodes the meaning of text into music, rated by listeners for musical coherence (3.83/5).",
+      "A semantic-to-music encoding system that turns study notes into personalised, neurodiversity-inclusive soundscapes. Phase 1 was a working prototype (Python, gTTS, pydub, librosa) tested with 208 student volunteers; 92.9% said it helped them retain material. Phase 2 built a novel NLP pipeline (spaCy, sentence-transformers, music21) that encodes the meaning of text into music, rated by listeners for musical coherence (3.83/5).",
     bullets: [
       "Submitted to the 2026 S.T. Yau High School Science Award (Asia), Computer Science category — shortlisted (Comp-220)",
       "Supervised by Mr. Aman Kesarwani, Pangea Society",
@@ -67,7 +89,7 @@ export const research: ResearchItem[] = [
     tag: "Wearable Hardware · Ballet Science",
     title: "EquiPointe",
     description:
-      'An IMU + FSR-based wearable system, built with research partner Anshul Bhatt and internally code-named "IRIS," that quantifies unsafe ballet footwork in real time — specifically sickling and rolling, two of the most common causes of dancer injury. Two hardware iterations (an early full-leg sensor rig, then a refined shoe-only build with FSR402 pressure sensors + an MPU6050 IMU + a Madgwick filter) reached 80–89% accuracy classifying risky footwork, backed by a custom live-calibration dashboard for capturing and logging session data.',
+      'An IMU + FSR-based wearable system, built with research partner Anshul Bhatt, that quantifies unsafe ballet footwork in real time — specifically sickling and rolling, two of the most common causes of dancer injury. Two hardware iterations (an early full-leg sensor rig, then a refined shoe-only build with FSR402 pressure sensors + an MPU6050 IMU + a Madgwick filter) reached 80–89% accuracy classifying risky footwork, backed by a custom live-calibration dashboard for capturing and logging session data.',
     bullets: [
       "Includes a full literature-review logbook and a conference-style presentation poster",
       "Custom dashboard software for live sensor calibration and session data capture",
@@ -136,7 +158,7 @@ export const research: ResearchItem[] = [
   },
 ];
 
-export const ballet = {
+export const ballet: TextSection = {
   heading: "Ballet",
   description:
     "Sara has trained as a ballet dancer since the age of three. Her years on pointe are the throughline behind both EquiPointe and her ballet research paper — technology projects that grew directly out of her own training.",
@@ -147,10 +169,10 @@ export const ballet = {
     { type: "video", src: "/videos/ballet/clip-2.mp4", poster: "/images/ballet/clip-2-poster.jpg", alt: "Ballet training clip" },
     { type: "video", src: "/videos/ballet/clip-3.mp4", poster: "/images/ballet/clip-3-poster.jpg", alt: "Ballet training clip" },
     { type: "video", src: "/videos/ballet/clip-4.mp4", poster: "/images/ballet/clip-4-poster.jpg", alt: "Ballet training clip" },
-  ] satisfies MediaItem[],
+  ],
 };
 
-export const movementLiteracy = {
+export const movementLiteracy: TextSection = {
   heading: "Movement Literacy",
   description:
     'A movement-education curriculum Sara designed herself, extending her ballet training into a teaching program for young dancers. She started with session-by-session lesson plans blending ballet-derived exercises with body-awareness games, then developed it into a formal curriculum proposal — complete with philosophy, eight curriculum modules, a safety framework, and institutional implementation models — written for physiotherapist review.',
@@ -161,7 +183,7 @@ export const movementLiteracy = {
     { type: "image", src: "/images/movement-literacy/session-4.jpg", alt: "Movement Literacy session in progress" },
     { type: "image", src: "/images/movement-literacy/session-5.jpg", alt: "Movement Literacy session in progress" },
     { type: "image", src: "/images/movement-literacy/session-6.jpg", alt: "Movement Literacy session in progress" },
-  ] satisfies MediaItem[],
+  ],
 };
 
 export type SchoolRoleItem = {
@@ -173,17 +195,20 @@ export type SchoolRoleItem = {
 export const schoolRoles: SchoolRoleItem[] = [
   {
     role: "MUN Head Chair",
-    context: 'Head Chair at DAIMUN 2025 — "Polycrisis: Navigating a New Global Order"',
-    gallery: [{ type: "image", src: "/images/leadership/mun-head-chair.png", alt: "MUN Head Chair at DAIMUN 2025" }],
+    context: "Head Chair at DAIMUN 2026",
+    // [pending] verified DAIMUN 2026 photo (alt: "MUN Head Chair at DAIMUN
+    // 2026") — the old image shows the 2025 event, so it's left off
+    gallery: [],
   },
   {
     role: "Student Council",
-    context: "[placeholder — add year/role details]",
+    context:
+      "House Captain of Panthers House. Elected by a school-wide teacher panel. Led 250+ students; organised inter-house competitions and campus engagement initiatives.",
     gallery: [{ type: "image", src: "/images/leadership/student-council.png", alt: "Student Council" }],
   },
   {
     role: "Sports Day House Captain",
-    context: "[placeholder — add year/house details]",
+    context: "", // [pending] confirmed caption
     gallery: [
       { type: "image", src: "/images/leadership/sports-day-house-captain.png", alt: "Sports Day House Captain" },
       { type: "video", src: "/videos/march-past.mp4", poster: "/images/misc/march-past-poster.jpg", alt: "March past — first place" },
@@ -191,7 +216,7 @@ export const schoolRoles: SchoolRoleItem[] = [
   },
   {
     role: "House Spirit — Panthers",
-    context: "[placeholder — add event/year context]",
+    context: "", // [pending] confirmed caption
     gallery: [
       { type: "image", src: "/images/leadership/house-spirit.png", alt: "House Spirit day, Panthers house" },
       { type: "image", src: "/images/leadership/house-spirit-2.png", alt: "House Spirit day, Panthers house" },
@@ -200,17 +225,17 @@ export const schoolRoles: SchoolRoleItem[] = [
   },
   {
     role: "Swimming Gala",
-    context: "[placeholder — add event context]",
+    context: "", // [pending] confirmed caption
     gallery: [{ type: "image", src: "/images/leadership/swimming-gala.png", alt: "Swimming Gala" }],
   },
   {
     role: "Teachers' Day",
-    context: "[placeholder — add event context]",
+    context: "", // [pending] confirmed caption
     gallery: [{ type: "image", src: "/images/leadership/teachers-day.png", alt: "Teachers' Day" }],
   },
   {
     role: "Inter-House Sports",
-    context: "[placeholder — add event context]",
+    context: "", // [pending] confirmed caption
     gallery: [
       { type: "image", src: "/images/leadership/interhouse-football.png", alt: "Inter-house football" },
       { type: "image", src: "/images/leadership/interhouse-table-tennis.png", alt: "Inter-house table tennis" },
@@ -218,7 +243,7 @@ export const schoolRoles: SchoolRoleItem[] = [
   },
 ];
 
-export const tspClub = {
+export const tspClub: TspClub = {
   name: "Tech-Sociopreneurship Club (TSP)",
   description:
     'Co-founded with classmates Divina Minocha and Lavanya Gupta, the Tech-Sociopreneurship Club blends AI, business, and social entrepreneurship into a two-semester curriculum, including mock investor panels. Club meeting minutes trace its own path from early brainstorming to a concrete concept, "StudyCycle" (a credit-based textbook and notes marketplace), showcased at a school-wide investor-pitch exhibition, "Business Bazaar."',
@@ -227,15 +252,29 @@ export const tspClub = {
     { type: "image", src: "/images/tsp-club/club-meeting.png", alt: "Tech-Sociopreneurship Club meeting" },
     { type: "image", src: "/images/tsp-club/ideation-session.png", alt: "Tech-Sociopreneurship Club ideation session" },
     { type: "image", src: "/images/tsp-club/judging-rubric.png", alt: "Founders Forum judging rubric" },
-  ] satisfies MediaItem[],
-  documents: [{ title: "Club Proposal", href: "/documents/tsp-club/tsp-club-proposal.pdf" }] as DocumentItem[],
+  ],
+  documents: [{ title: "Club Proposal", href: "/documents/tsp-club/tsp-club-proposal.pdf" }],
 };
 
-export const internship = {
-  title: "BondboT — AI Support Chatbot",
+export const internship: Internship = {
+  // [pending] confirm company spelling (BondbloX vs BondBloxx)
+  title: "BondbloX | Exploring Technology in Finance",
   description:
-    "Built with fellow interns Diya and Grace for a bond-trading platform, BondboT is a rulebook-grounded support chatbot, built with Zapier, designed to help a growing platform scale customer support without scaling headcount.",
-  documents: [{ title: "BondboT Presentation", href: "/documents/internship/bondbot-presentation.pdf" }] as DocumentItem[],
+    "During my internship at BondbloX, I gained exposure to the intersection of financial services, technology, and business. The experience helped me explore how financial products are developed and delivered, and how technology can make financial markets more accessible and efficient. My internship culminated in creating an AI-based chatbot for the BondbloX website and a bond recommendation engine to be included on the website.",
+  documents: [{ title: "BondboT Presentation", href: "/documents/internship/bondbot-presentation.pdf" }],
+};
+
+export type TspClub = {
+  name: string;
+  description: string;
+  gallery: MediaItem[];
+  documents: DocumentItem[];
+};
+
+export type Internship = {
+  title: string;
+  description: string;
+  documents: DocumentItem[];
 };
 
 export type AwardItem = {
@@ -245,11 +284,6 @@ export type AwardItem = {
 };
 
 export const awards: AwardItem[] = [
-  {
-    title: "Excellence in STEM",
-    issuer: "DAIS Annual Awards Ceremony 2025–26, Class 11",
-    image: "/images/awards/excellence-in-stem.png",
-  },
   {
     title: "CREST Gold Award",
     issuer:
@@ -261,4 +295,35 @@ export const awards: AwardItem[] = [
     issuer: "Shortlisted, Computer Science category (Comp-220)",
     image: "/images/edubeats/st-yau-shortlist.png",
   },
+  {
+    title: "Excellence in STEM",
+    issuer: "DAIS Annual Awards Ceremony 2025–26, Class 11",
+    image: "/images/awards/excellence-in-stem.png",
+  },
 ];
+
+// Everything the site renders. The admin panel saves an edited copy of
+// this to Supabase; see src/lib/content.ts.
+export type SiteContent = {
+  siteConfig: SiteConfig;
+  about: { heading: string; paragraphs: string[] };
+  research: ResearchItem[];
+  ballet: TextSection;
+  movementLiteracy: TextSection;
+  schoolRoles: SchoolRoleItem[];
+  tspClub: TspClub;
+  internship: Internship;
+  awards: AwardItem[];
+};
+
+export const defaultContent: SiteContent = {
+  siteConfig,
+  about,
+  research,
+  ballet,
+  movementLiteracy,
+  schoolRoles,
+  tspClub,
+  internship,
+  awards,
+};

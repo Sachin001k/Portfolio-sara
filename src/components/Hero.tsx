@@ -1,6 +1,6 @@
-import { siteConfig } from "@/content/site";
+import { hasContact, type SiteConfig } from "@/content/site";
 
-export function Hero() {
+export function Hero({ config: siteConfig }: { config: SiteConfig }) {
   const initial = siteConfig.name.charAt(0).toUpperCase();
 
   return (
@@ -31,17 +31,19 @@ export function Hero() {
 
         <div className="mt-10 flex flex-wrap gap-4">
           <a
-            href="#projects"
+            href="#research"
             className="rounded-full bg-clay px-6 py-3 text-sm font-semibold text-cream transition-colors hover:bg-clay-dark"
           >
             See my work
           </a>
-          <a
-            href="#contact"
-            className="rounded-full border border-ink/20 px-6 py-3 text-sm font-semibold transition-colors hover:border-ink/40"
-          >
-            Get in touch
-          </a>
+          {hasContact(siteConfig) && (
+            <a
+              href="#contact"
+              className="rounded-full border border-ink/20 px-6 py-3 text-sm font-semibold transition-colors hover:border-ink/40"
+            >
+              Get in touch
+            </a>
+          )}
         </div>
       </div>
 

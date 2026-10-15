@@ -1,8 +1,20 @@
 import { DocumentLinks } from "@/components/DocumentLink";
 import { Gallery } from "@/components/Gallery";
-import { internship, schoolRoles, tspClub } from "@/content/site";
+import type {
+  Internship,
+  SchoolRoleItem,
+  TspClub,
+} from "@/content/site";
 
-export function Leadership() {
+export function Leadership({
+  schoolRoles,
+  tspClub,
+  internship,
+}: {
+  schoolRoles: SchoolRoleItem[];
+  tspClub: TspClub;
+  internship: Internship;
+}) {
   return (
     <section id="leadership" className="bg-sand/60 py-20">
       <div className="mx-auto max-w-5xl px-6">
@@ -11,7 +23,7 @@ export function Leadership() {
         <h3 className="mt-10 font-display text-xl text-ink/70">
           School Leadership
         </h3>
-        <div className="mt-4 grid gap-6 sm:grid-cols-2">
+        <div className="mt-4 grid items-start gap-6 sm:grid-cols-2">
           {schoolRoles.map((item) => (
             <div
               key={item.role}
@@ -22,7 +34,9 @@ export function Leadership() {
                 columns={item.gallery.length > 1 ? "grid-cols-2" : "grid-cols-1"}
               />
               <h4 className="mt-4 font-display text-lg">{item.role}</h4>
-              <p className="mt-1 text-sm text-ink/65">{item.context}</p>
+              {item.context && (
+                <p className="mt-1 text-sm text-ink/65">{item.context}</p>
+              )}
             </div>
           ))}
         </div>

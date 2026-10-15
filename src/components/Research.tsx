@@ -1,8 +1,8 @@
 import { DocumentLinks } from "@/components/DocumentLink";
 import { Gallery } from "@/components/Gallery";
-import { research } from "@/content/site";
+import type { ResearchItem } from "@/content/site";
 
-export function Research() {
+export function Research({ research }: { research: ResearchItem[] }) {
   return (
     <section id="research" className="bg-sand/60 py-20">
       <div className="mx-auto max-w-5xl px-6">

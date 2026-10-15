@@ -16,11 +16,15 @@ export function Gallery({
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [index, setIndex] = useState(0);
+  // Media is only mounted while the dialog is open, so videos never load
+  // or autoplay in the background and stop as soon as it closes.
+  const [isOpen, setIsOpen] = useState(false);
 
   if (items.length === 0) return null;
 
   const open = (i: number) => {
     setIndex(i);
+    setIsOpen(true);
     dialogRef.current?.showModal();
   };
   const step = (delta: number) =>
@@ -70,8 +74,13 @@ export function Gallery({
 
       <dialog
         ref={dialogRef}
+        onClose={() => setIsOpen(false)}
         onClick={(e) => {
           if (e.target === e.currentTarget) dialogRef.current?.close();
+        }}
+        onKeyDown={(e) => {
+          if (e.key === "ArrowLeft") step(-1);
+          if (e.key === "ArrowRight") step(1);
         }}
         className="m-auto w-[min(90vw,56rem)] rounded-2xl bg-ink p-0 backdrop:bg-ink/80"
       >
@@ -86,7 +95,7 @@ export function Gallery({
           </button>
 
           <div className="relative h-[80vh] w-full overflow-hidden rounded-t-2xl bg-black">
-            {active?.type === "image" ? (
+            {!isOpen ? null : active.type === "image" ? (
               <Image
                 src={active.src}
                 alt={active.alt}
@@ -94,7 +103,7 @@ export function Gallery({
                 sizes="90vw"
                 className="object-contain"
               />
-            ) : active ? (
+            ) : (
               <video
                 key={active.src}
                 src={active.src}
@@ -103,7 +112,7 @@ export function Gallery({
                 autoPlay
                 className="h-full w-full object-contain"
               />
-            ) : null}
+            )}
           </div>
 
           {items.length > 1 && (

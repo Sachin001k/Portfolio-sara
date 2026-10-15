@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { PdfReader } from "@/components/PdfReader";
 
 export type DocumentItem = { title: string; href: string };
 
@@ -18,12 +19,17 @@ export function DocumentLinks({ documents }: { documents: DocumentItem[] }) {
 
 function DocumentLink({ document: doc }: { document: DocumentItem }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  // Only load the PDF once the reader is opened, not on page load.
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
       <button
         type="button"
-        onClick={() => dialogRef.current?.showModal()}
+        onClick={() => {
+          setIsOpen(true);
+          dialogRef.current?.showModal();
+        }}
         className="rounded-full border border-clay/30 bg-clay/10 px-4 py-1.5 text-sm font-medium text-clay-dark transition-colors hover:bg-clay/20"
       >
         {doc.title} ↗
@@ -31,15 +37,16 @@ function DocumentLink({ document: doc }: { document: DocumentItem }) {
 
       <dialog
         ref={dialogRef}
+        onClose={() => setIsOpen(false)}
         onClick={(e) => {
           if (e.target === e.currentTarget) dialogRef.current?.close();
         }}
-        className="m-auto h-[85vh] w-[min(90vw,60rem)] rounded-2xl bg-cream p-0 backdrop:bg-ink/80"
+        className="m-auto h-[90vh] w-[min(94vw,56rem)] overflow-hidden rounded-2xl bg-sand p-0 shadow-2xl backdrop:bg-ink/70 backdrop:backdrop-blur-sm"
       >
         <div className="flex h-full flex-col">
-          <div className="flex items-center justify-between border-b border-ink/10 px-5 py-3">
-            <h3 className="font-display text-lg">{doc.title}</h3>
-            <div className="flex items-center gap-3">
+          <div className="flex items-center justify-between gap-3 border-b border-ink/10 bg-cream px-5 py-3">
+            <h3 className="min-w-0 truncate font-display text-lg">{doc.title}</h3>
+            <div className="flex shrink-0 items-center gap-3">
               <a
                 href={doc.href}
                 download
@@ -57,7 +64,9 @@ function DocumentLink({ document: doc }: { document: DocumentItem }) {
               </button>
             </div>
           </div>
-          <iframe src={doc.href} title={doc.title} className="flex-1" />
+          <div className="flex-1 overflow-y-auto">
+            {isOpen && <PdfReader src={doc.href} />}
+          </div>
         </div>
       </dialog>
     </>

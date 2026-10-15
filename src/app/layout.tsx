@@ -14,9 +14,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Sara — Portfolio",
+  title: "Sara Hulyalkar — Portfolio",
   description:
-    "Sara's portfolio — storyteller, changemaker, creative visionary.",
+    "Sara Hulyalkar — ballet dancer, STEM researcher, and student innovator at Dhirubhai Ambani International School.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

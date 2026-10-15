@@ -2,19 +2,26 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { siteConfig } from "@/content/site";
 
-const links = [
+const baseLinks = [
   { href: "#about", label: "About" },
   { href: "#research", label: "Research" },
   { href: "#dance", label: "Dance" },
   { href: "#leadership", label: "Leadership" },
   { href: "#awards", label: "Awards" },
-  { href: "#contact", label: "Contact" },
 ];
 
-export function Navbar() {
+export function Navbar({
+  name,
+  showContact,
+}: {
+  name: string;
+  showContact: boolean;
+}) {
   const [open, setOpen] = useState(false);
+  const links = showContact
+    ? [...baseLinks, { href: "#contact", label: "Contact" }]
+    : baseLinks;
 
   return (
     <header className="sticky top-0 z-50 border-b border-ink/10 bg-cream/90 backdrop-blur">
@@ -23,7 +30,7 @@ export function Navbar() {
           href="/"
           className="font-display text-xl font-medium tracking-tight"
         >
-          {siteConfig.name}
+          {name}
         </Link>
 
         <ul className="hidden gap-8 text-sm font-medium md:flex">
