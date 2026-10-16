@@ -360,3 +360,34 @@ sits alone below School Leadership.
 Still waiting on Sara: 2 new videos with headings and captions, dates
 and pictures via WhatsApp, and possibly a rewritten club section in a
 new Google Doc.
+
+## Deploying (2026-10-15)
+
+The Vercel project is `portfolio_sara` (team `sachin001ks-projects`,
+https://portfoliosara-nine.vercel.app). Pushing to GitHub did NOT
+trigger a deploy: commit 77bc8ca had no deployment, so the project
+appears not to be Git-connected. Deploy with the CLI from the repo root:
+`vercel deploy --prod --yes`. The folder is linked (`.vercel/`,
+git-ignored). `.vercelignore` keeps `Sara_Hulyalkar*` and `.env*` out of
+the upload. Supabase env vars are set in Vercel for Production and
+Preview; `ADMIN_EMAILS` is not set there yet.
+
+## EduBeats number + Academic Excellence image (2026-10-15)
+
+- EduBeats: at the user's explicit instruction, only the number changed
+  ("tested with 50 student volunteers; 92.9%…"). The linked Comp-220
+  report still says 208.
+- Academic Excellence card image: `public/images/awards/academic-excellence.jpg`,
+  from Drive "Sara Hulyalkar Awards/Academic Excellence Award" (certificate
+  2025–2026, IBDP Year 11). Rotation is baked into the pixels and the EXIF
+  tag stripped.
+
+## "Why I build" video section (done 2026-10-16)
+
+Sara's one-minute pitch (`Sara_Hulyalkar /Sara's_Pitch_final.mp4`, 24 MB
+portrait) was transcoded to `public/videos/why-i-build.mp4` (720p, faststart,
+7.4 MB), with cover frame `public/images/misc/why-i-build-poster.jpg` taken at
+3 s. The opening title card was too loud for a cover. It is rendered by
+`src/components/WhyIBuild.tsx` between About and Research; content is in
+`pitch` in `site.ts`. The one-line description is Claude's wording; the user
+hasn't confirmed it. No nav link was added.

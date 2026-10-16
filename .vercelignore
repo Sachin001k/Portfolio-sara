@@ -1,0 +1,6 @@
+# Keep CLI deploys small and private: never upload Sara's raw source
+# material or local env files.
+/Sara_Hulyalkar*
+.env*
+.next
+node_modules

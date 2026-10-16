@@ -7,6 +7,7 @@ import { Hero } from "@/components/Hero";
 import { Leadership } from "@/components/Leadership";
 import { Navbar } from "@/components/Navbar";
 import { Research } from "@/components/Research";
+import { WhyIBuild } from "@/components/WhyIBuild";
 import { hasContact } from "@/content/site";
 import { getContent } from "@/lib/content";
 
@@ -20,6 +21,7 @@ export default async function Home() {
       <main className="flex-1">
         <Hero config={siteConfig} />
         <About about={content.about} resumeUrl={siteConfig.resumeUrl} />
+        <WhyIBuild pitch={content.pitch} />
         <Research research={content.research} />
         <DanceMovement
           ballet={content.ballet}

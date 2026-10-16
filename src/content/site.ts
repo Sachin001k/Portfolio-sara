@@ -33,7 +33,7 @@ export const siteConfig: SiteConfig = {
   pronouns: "she/her",
   tags: ["Ballet Dancer", "STEM Researcher", "Student Innovator"],
   heroIntro:
-    "I'm Sara, a Class 12 student at Dhirubhai Ambani International School who loves building at the intersection of engineering, business, and human experience. From developing wearable sensors to improve ballet technique to creating an app that turns study notes into music, I enjoy turning problems I care about into technological solutions. What excites me just as much as building a product is figuring out how to bring it to life: understanding the people it serves, designing a viable business model, and finding ways to scale its impact. I want to bridge the gap between what technology makes possible and what people actually need.",
+    "I'm Sara, a Class 12 student at Dhirubhai Ambani International School. I love building at the intersection of engineering, business, and human experience. From developing wearable sensors to improving ballet technique to creating an app that turns study notes into music, I enjoy turning problems I care about into technological solutions. What excites me just as much as building a product is figuring out how to bring it to life: understanding the people it serves, designing a viable business model, and finding ways to scale its impact. I want to bridge the gap between what technology makes possible and what people actually need.",
   location: "Mumbai, India",
   // Empty links are hidden; the Contact section (and its nav link / hero
   // button) is hidden entirely while it has nothing to link to.
@@ -56,6 +56,27 @@ export const about = {
   ],
 };
 
+export type PitchVideo = {
+  eyebrow: string;
+  heading: string;
+  description: string;
+  /** Empty hides the whole section. */
+  video: string;
+  poster: string;
+  duration: string;
+};
+
+// Sara's one-minute pitch, shown right after About Me.
+export const pitch: PitchVideo = {
+  eyebrow: "Video · 1 min",
+  heading: "Why I build",
+  description:
+    "A one-minute pitch: how years of ballet training led me to build EquiPointe, the shoe that corrects you.",
+  video: "/videos/why-i-build.mp4",
+  poster: "/images/misc/why-i-build-poster.jpg",
+  duration: "1:05",
+};
+
 export type ResearchItem = {
   tag: string;
   title: string;
@@ -70,7 +91,7 @@ export const research: ResearchItem[] = [
     tag: "EdTech · Science Award",
     title: "EduBeats",
     description:
-      "A semantic-to-music encoding system that turns study notes into personalised, neurodiversity-inclusive soundscapes. Phase 1 was a working prototype (Python, gTTS, pydub, librosa) tested with 208 student volunteers; 92.9% said it helped them retain material. Phase 2 built a novel NLP pipeline (spaCy, sentence-transformers, music21) that encodes the meaning of text into music, rated by listeners for musical coherence (3.83/5).",
+      "A semantic-to-music encoding system that turns study notes into personalised, neurodiversity-inclusive soundscapes. Phase 1 was a working prototype (Python, gTTS, pydub, librosa) tested with 50 student volunteers; 92.9% said it helped them retain material. Phase 2 built a novel NLP pipeline (spaCy, sentence-transformers, music21) that encodes the meaning of text into music, rated by listeners for musical coherence (3.83/5).",
     bullets: [
       "Submitted to the 2026 S.T. Yau High School Science Award (Asia), Computer Science category — shortlisted (Comp-220)",
       "Supervised by Mr. Aman Kesarwani, Pangea Society",
@@ -178,7 +199,7 @@ export const ballet: TextSection = {
 export const movementLiteracy: TextSection = {
   heading: "Movement Literacy",
   description:
-    'A movement-education curriculum Sara designed herself, extending her ballet training into a teaching program for young dancers. She started with session-by-session lesson plans blending ballet-derived exercises with body-awareness games, then developed it into a formal curriculum proposal — complete with philosophy, eight curriculum modules, a safety framework, and institutional implementation models — written for physiotherapist review.',
+    "I designed a movement literacy curriculum that extends my ballet training into a teaching program for young dancers. I started with session-by-session lesson plans blending ballet-derived exercises with body-awareness games, then developed them into a formal curriculum proposal — complete with a philosophy, eight curriculum modules, a safety framework, and institutional implementation models — written for physiotherapist review.",
   gallery: [
     { type: "image", src: "/images/movement-literacy/session-1.jpg", alt: "Movement Literacy session in progress" },
     { type: "image", src: "/images/movement-literacy/session-2.jpg", alt: "Movement Literacy session in progress" },
@@ -285,7 +306,7 @@ export const awards: AwardItem[] = [
   {
     title: "Academic Excellence Award",
     issuer: "For scoring 40+/42 in both terms, Class 11",
-    image: "",
+    image: "/images/awards/academic-excellence.jpg",
   },
 ];
 
@@ -294,6 +315,7 @@ export const awards: AwardItem[] = [
 export type SiteContent = {
   siteConfig: SiteConfig;
   about: { heading: string; paragraphs: string[] };
+  pitch: PitchVideo;
   research: ResearchItem[];
   ballet: TextSection;
   movementLiteracy: TextSection;
@@ -305,6 +327,7 @@ export type SiteContent = {
 export const defaultContent: SiteContent = {
   siteConfig,
   about,
+  pitch,
   research,
   ballet,
   movementLiteracy,
